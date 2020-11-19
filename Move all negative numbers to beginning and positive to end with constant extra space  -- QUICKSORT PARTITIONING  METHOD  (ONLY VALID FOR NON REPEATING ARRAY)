@@ -1,0 +1,82 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int fun_pivot(int a[],int n)
+{
+    int minp=a[0];
+    if(minp<0)
+    {
+        for(int i=1;i<n;i++)
+        {
+            if(a[i]<0 || a[0]==0)
+            {
+                minp=max(minp,a[i]);
+            }
+        }
+    }
+    else
+    {
+        for(int i=1;i<n;i++)
+        {
+            if(a[i]>0 || a[0]==0)
+            {
+                minp=min(minp,a[i]);
+            }
+        }
+    }
+    return minp;
+}
+
+void partition(int a[],int l,int h)
+{
+    int i=l;
+    int j=h;
+    int pivot=fun_pivot(a,h);
+    a[l]=pivot;
+    cout<<pivot<<endl;
+    while(i<j)
+    {
+        do{
+            i++;
+        }while(a[i]<pivot || a[i]==pivot);
+        cout<<i<<endl;
+        
+        do{
+            j--;
+        }while(a[j]>pivot || a[j]==pivot);
+        cout<<j<<endl;
+        
+        if(i<j)
+        {
+        swap(a[i],a[j]);
+        }
+        
+    }
+    cout<<a[j]<<" "<<a[l]<<endl;
+    swap(a[j],a[l]);
+    cout<<a[j]<<" "<<a[l]<<endl;
+    for(int k=0;k<h;k++)
+    {
+        cout<<a[k]<<" ";
+    }
+}
+
+int main() {
+    int n;
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+    
+    partition(a,0,n);
+    cout<<endl;
+    for(int i=0;i<n;i++)
+    {
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
+	return 0;
+}
