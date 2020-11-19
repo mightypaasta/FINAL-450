@@ -1,0 +1,48 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+void twoPointer(int a[],int n)
+{
+    int l=0;
+    int r=n-1;
+    while(l<r)
+    {
+        if(a[l]<0 && a[r]<0)
+        {
+            l++;
+        }
+        else if(a[l]>0 && a[r]<0)
+        {
+            swap(a[l],a[r]);
+            l++;
+            r--;
+        }
+        else if(a[l]<0 && a[r]>0)
+        {
+            l++;
+            r--;
+        }
+        else
+        {
+            r--;
+        }
+    }
+    for(int x=0;x<n;x++)
+    {
+        cout<<a[x]<<" ";
+    }
+    cout<<endl;
+}
+
+int main()
+{
+    int n;
+    cin>>n;
+    int a[n];
+    for(int i=0;i<n;i++)
+    {
+        cin>>a[i];
+    }
+    twoPointer(a,n);
+}
