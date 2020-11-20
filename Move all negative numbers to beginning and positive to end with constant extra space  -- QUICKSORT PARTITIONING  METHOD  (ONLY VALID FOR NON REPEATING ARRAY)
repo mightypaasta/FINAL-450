@@ -33,19 +33,23 @@ void partition(int a[],int l,int h)
     int i=l;
     int j=h;
     int pivot=fun_pivot(a,h);
-    a[l]=pivot;
     cout<<pivot<<endl;
+    cout<<a[l]<<endl;
+    if(pivot<0)
+    {
     while(i<j)
     {
         do{
             i++;
         }while(a[i]<pivot || a[i]==pivot);
         cout<<i<<endl;
+        cout<<"   "<<a[i]<<endl;
         
         do{
             j--;
-        }while(a[j]>pivot || a[j]==pivot);
+        }while(a[j]>pivot);
         cout<<j<<endl;
+        cout<<"   "<<a[j]<<endl;
         
         if(i<j)
         {
@@ -53,8 +57,35 @@ void partition(int a[],int l,int h)
         }
         
     }
+    }
+    else if(pivot>0)
+    {
+        while(i<j)
+        {
+            do{
+                i++;
+            }while(a[i]<pivot );
+            cout<<i<<endl;
+            
+            do{
+                j--;
+            }while(a[j]>pivot || a[j]==pivot);
+            cout<<j<<endl;
+            
+            if(i<j)
+            {
+            swap(a[i],a[j]);
+            }
+        }
+    }
+    for(int i=0;i<h;i++)
+    {
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
+    cout<<i<<" "<<j<<endl;
     cout<<a[j]<<" "<<a[l]<<endl;
-    swap(a[j],a[l]);
+    swap(a[j],pivot);
     cout<<a[j]<<" "<<a[l]<<endl;
     for(int k=0;k<h;k++)
     {
@@ -70,6 +101,11 @@ int main() {
     {
         cin>>a[i];
     }
+    for(int i=0;i<n;i++)
+    {
+        cout<<a[i]<<" ";
+    }
+    cout<<endl;
     
     partition(a,0,n);
     cout<<endl;
