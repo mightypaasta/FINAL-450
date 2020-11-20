@@ -1,0 +1,110 @@
+#include <iostream>
+#include <algorithm>
+#include <vector>
+using namespace std;
+
+void printUnionArray(vector<int> a,int n)
+{
+    cout<<a[0]<<" ";
+    for(int i=1;i<n;i++)
+    {
+        if(a[i]==a[i-1])
+        {}
+        else
+        {
+        cout<<a[i]<<" ";
+        }
+    }
+    cout<<endl;
+}
+
+void printUnion(int a[],int b[],int m,int n)
+{
+    int i=0,j=0;
+    vector<int> Union;
+    while(i<m && j<n)
+    {
+        while(a[i]<b[j] && i<m)
+        {
+            Union.push_back(a[i]);
+            i++;
+        }
+            
+        while(a[i]>b[j] && j<n)
+        {
+            Union.push_back(b[j]);
+            j++;
+        }
+        while(a[i]==b[j] && i<m && j<n)
+        {
+            Union.push_back(a[i]);
+            i++;
+            j++;
+        }
+    }
+    if(i<m)
+    {
+    while(i<m)
+    {
+        Union.push_back(a[i]);
+        i++;
+    }
+    }
+    else if(j<n)
+    {
+        while(j<n)
+        {
+            Union.push_back(b[j]);
+            j++;
+        }
+    }
+    else
+    {
+    }
+    int size=Union.size();
+    cout<<size<<endl;
+    // for(int x=0;x<size;x++)
+    // {
+    //     cout<<Union[x]<<" ";
+    // }
+    // cout<<endl;
+    printUnionArray(Union,size);
+}
+
+int main()
+{
+	int t;
+	cin>>t;
+    while(t--)
+    {
+    	int m;
+    	cin>>m;
+    	int n;
+    	cin>>n;
+    	int a[m],b[n];
+    	for(int i=0;i<m;i++)
+    	{
+    	    cin>>a[i];
+    	}
+    	for(int i=0;i<n;i++)
+    	{
+    	    cin>>b[i];
+    	}
+    	sort(a,a+m);
+    	sort(b,b+n);
+    	
+    	if(m>n)
+    	{
+    	    printUnion(a,b,m,n);
+    	}
+    	else if(m<n)
+    	{
+    	    printUnion(b,a,n,m);
+    	}
+    	else
+    	{
+    	    printUnion(a,b,m,n);
+    	}
+    }
+    	return 0;
+}
